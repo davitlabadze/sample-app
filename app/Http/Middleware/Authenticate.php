@@ -9,7 +9,7 @@ class Authenticate extends Middleware
 {
     public function handles($request, $next)
     {
-        if (Auth::check) {
+        if (Auth::check()) {
             return $next($request);
         }
         return redirect('/login');
