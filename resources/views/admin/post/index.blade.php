@@ -21,7 +21,7 @@
                             <tr>
                                 <td>{{ $ps->id }}</td>
                                 <td>{{ $ps->title }}</td>
-                                <td><img src="{{ url($ps->image) }}" width="50" height="50" ></td>
+                                <td><img src="{{ $ps->getImageUrl() }}" width="50" height="50" ></td>
                                 <td>
                                     <form method="POST" action="{{ route('admin.post.destroy',['post' => $ps->id]) }}">
                                         @csrf

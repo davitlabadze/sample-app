@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">create category</div>
+                <div class="card-header">Edit category</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.category.update',['category'=>$category->id]) }}">
+                    <form method="POST" onsubmit="updateCategory(event)" action="{{ route('admin.category.update',['category'=>$category->id]) }}">
                         @csrf
                         <input type="hidden" name="_method" value="PUT">
 
@@ -27,10 +27,6 @@
                             </div>
                         </div>
 
-                        
-
-                       
-
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -42,6 +38,30 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            @include('admin.category.table',['categories' => $categories])
+        </div>
     </div>
 </div>
 @endsection
+
+
+<script>
+    function updateCategory(e) {
+        e.preventDefault();
+        var serializedForm = $(e.target).serialize()
+        var url = $(e.target).attr('action')
+
+        $.ajax({
+            url: url + '?' + serializedForm,
+            type: 'PUT',
+            success: function(data) {
+                refreshCategoryTable()
+            },
+            error: function() {
+
+            },
+        });
+    }
+
+</script>

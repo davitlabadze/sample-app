@@ -27,6 +27,11 @@
   max-width: 40rem;
 }
 
+.jumbotron img{
+  width: 500px;
+  height: 250px;
+}
+
 footer {
   padding-top: 3rem;
   padding-bottom: 3rem;

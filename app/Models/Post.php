@@ -10,6 +10,15 @@ class Post extends Model
     public $timestamps= true;
     public $table = 'posts';
 
+    public function getImageUrl()
+    {
+        if ($this->image) {
+            return $this->image;
+        }
+
+        return url('images/noimage.jpg');
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
