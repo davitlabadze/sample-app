@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="row">
-  @foreach ($post as $post)
+  @foreach ($posts as $post)
   @include('components.post',['post'=>$post])
   @endforeach
  

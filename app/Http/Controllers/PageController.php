@@ -10,8 +10,17 @@ class PageController extends Controller
 {
     public function home()
     {   
-        $posts = Post::with('category')->whereHas('category')->get();
-        return view('pages.index')->with('post', $posts);
+        $posts = Post::join('categories', 'posts.category_id', '=', 'categories.id')
+        ->select(
+        'posts.*',
+        'categories.name as category_name',
+        'categories.slug as category_slug'
+         )
+        ->get();
+      
+
+    return view('pages.index')->with('posts', $posts);
+        return view('pages.index')->with('posts', $posts);
     }
     
     public function singlePost($slug)
@@ -23,8 +32,15 @@ class PageController extends Controller
 
     public function singleCategory($slug)
     {
-        $category = Category::where('slug', $slug)->with('posts')->firstOrFail();
-        // $posts = Post::where('category_id', $category->id)->get();
-        return view('pages.category')->with('category', $category);
+        $posts = Post::join('categories', 'categories.id', '=', 'posts.category_id')
+      ->where('categories.slug', '=', $slug)
+      ->select(
+        'posts.*',
+        'categories.name as category_name',
+        'categories.slug as category_slug'
+      )->get();
+
+
+    return view('pages.category')->with('posts', $posts);
     }
 }

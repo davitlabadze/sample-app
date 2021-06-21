@@ -3,7 +3,7 @@
       <img class="card-img-top" src="{{ $post->getImageUrl() }}" alt="Card image cap">
       <div class="card-body">
         <p class="card-text font-weight-bold" >{{ $post->title }}</p>
-        <p class="card-text" >{{ substr($post->text ,0,200) }}...</p>
+        <p class="card-text" >{{ substr($post->text ,0,150) }}...</p>
 
 
         {{-- <div class="d-flex justify-content-between align-items-center"> --}}
@@ -15,12 +15,12 @@
 
            
               
-            <a href="{{ $post->category ? route('front.post', ['slug' => $post->slug]) : '#'  }}" type="button" 
+            <a href="{{ route('front.category', ['slug' => $post->category_slug]) }}" type="button" 
               class="btn btn-sm btn-outline-secondary">
-              {{ $post->category->name }}
+              {{ $post->category_name }}
             </a>
           </div>
           <small class="text-muted">{{ $post->created_at->diffInMinutes(now()) }}min</small>
         </div>
       </div>
-    </div>
+    </div>    
